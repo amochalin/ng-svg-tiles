@@ -1,0 +1,53 @@
+.header {
+	background: #001414;
+	color: #fff;
+	padding: 100px 0 130px;
+	margin-bottom: -44px; 
+}
+h6 {
+	color: #00cccc;
+}
+/deep/ .nav-tabs {
+	border-bottom: none;
+}
+/deep/ .nav-item {
+	font-size: 18px;
+}
+/deep/ a, /deep/ a:hover {
+    color: #47ffff;
+}
+/deep/ .nav-tabs .nav-link:hover {
+	border-color: #47ffff;
+	border-bottom: none;
+}
+/deep/ .nav-tabs .nav-link.active {
+    color: #00cccc;
+}
+
+h3 {
+	color: #009999;
+	margin: 20px 0 10px;
+	font-size: 18px;
+}
+button {
+	color: #008888;
+	border: #008888 2px solid;
+	border-shadow: none;
+	background: none;
+}
+textarea {
+	border: #008888 1px solid;
+}
+#templateInput {
+	font-family: monospace;
+}
+.tiles-display {
+	background: #888;
+	padding: 50px;
+}
+.tiles-display dynamic-view {
+	background: #fff;
+	width: 100%;
+	display: inline-block;
+	margin: 0 auto;
+}
