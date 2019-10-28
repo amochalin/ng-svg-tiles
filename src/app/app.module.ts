@@ -7,6 +7,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from './app.component';
 import { DynamicTemplateView } from './dynamic/dynamicTemplateView.component';
 import { DynamicTypeBuilder } from './dynamic/typeBuilder';
+import { SvgEditorComponent } from './svg-editor/svg-editor.component';
 
 export function createCompiler(compilerFactory: CompilerFactory) {
   return compilerFactory.createCompiler();
@@ -15,7 +16,8 @@ export function createCompiler(compilerFactory: CompilerFactory) {
 @NgModule({
   declarations: [
       AppComponent,
-	  DynamicTemplateView
+      SvgEditorComponent,
+	    DynamicTemplateView
   ],
   imports: [
     BrowserModule,

@@ -18,14 +18,15 @@
                 </div>
                 <div class="row mt-3">
                     <div class="col-12">
-                        <button (click)="template = templateInput.value" class="float-right">Render</button>
+                        <button (click)="template = changedTemplate" class="float-right">Render</button>
                         <h3>SVG Template</h3>
                         
-                        <textarea class="col-12" 
+                        <!-- <textarea class="col-12" 
                                   rows="10" 
                                   #templateInput 
                                   value="{{template}}" 
-                                  id="templateInput"></textarea>
+                                  id="templateInput"></textarea> -->
+                        <svg-editor [content]="template" (change)="changedTemplate = $event"></svg-editor>
                         
                     </div>
                 </div>

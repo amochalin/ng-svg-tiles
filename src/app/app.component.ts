@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GeneratorsFactory } from './generators-factory.service';
+import { createOfflineCompileUrlResolver } from '@angular/compiler';
 
 @Component({
 	selector: 'app-root',
