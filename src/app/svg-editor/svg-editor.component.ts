@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import * as brace from 'brace';
-import './svg-with-angular-template-syntax.js';
+import './svg-angular-mode.js';
 
 @Component({
     selector: 'svg-editor',
@@ -26,7 +26,7 @@ export class SvgEditorComponent implements OnInit {
     ngOnInit() {
         this.editor = brace.edit('svg-editor');
         this.editor.setShowPrintMargin(false);
-        this.editor.getSession().setMode("ace/mode/svg");
+        this.editor.getSession().setMode("ace/mode/angular-svg");
         this.editor.container.style.lineHeight = 1.4;
         this.editor.renderer.updateFontSize();
         this.editor.on("change", ()=>{

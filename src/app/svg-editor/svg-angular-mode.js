@@ -646,7 +646,7 @@ oop.inherits(Mode, TextMode);
     this.blockComment = {start: "<!--", end: "-->"};
 
     this.createWorker = function(session) {
-        var worker = new WorkerClient(["ace"], require("brace/worker/xml"), "Worker");
+        var worker = new WorkerClient(["ace"], require("./xml-angular-worker"), "Worker");
         worker.attachToDocument(session.getDocument());
 
         worker.on("error", function(e) {
@@ -1530,7 +1530,7 @@ oop.inherits(FoldMode, BaseFoldMode);
 
 });
 
-ace.define("ace/mode/svg",["require","exports","module","ace/lib/oop","ace/mode/xml","ace/mode/javascript","ace/mode/svg_highlight_rules","ace/mode/folding/mixed","ace/mode/folding/xml","ace/mode/folding/cstyle"], function(acequire, exports, module) {
+ace.define("ace/mode/angular-svg",["require","exports","module","ace/lib/oop","ace/mode/xml","ace/mode/javascript","ace/mode/svg_highlight_rules","ace/mode/folding/mixed","ace/mode/folding/xml","ace/mode/folding/cstyle"], function(acequire, exports, module) {
 "use strict";
 
 var oop = acequire("../lib/oop");
@@ -1564,7 +1564,7 @@ oop.inherits(Mode, XmlMode);
     };
     
 
-    this.$id = "ace/mode/svg";
+    this.$id = "ace/mode/angular-svg";
 }).call(Mode.prototype);
 
 exports.Mode = Mode;
