@@ -20,14 +20,7 @@
                     <div class="col-12">
                         <button (click)="template = changedTemplate" class="float-right">Render</button>
                         <h3>SVG Template</h3>
-                        
-                        <!-- <textarea class="col-12" 
-                                  rows="10" 
-                                  #templateInput 
-                                  value="{{template}}" 
-                                  id="templateInput"></textarea> -->
                         <svg-editor [content]="template" (change)="changedTemplate = $event"></svg-editor>
-                        
                     </div>
                 </div>
             </ng-template>

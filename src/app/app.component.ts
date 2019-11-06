@@ -20,11 +20,16 @@ export class AppComponent implements OnInit {
 	    }
 	}
 	public composeSVGTemplate(): string {
-	    return '<svg width="100%" height="300">' + this.template +'</svg>';
+
+		return ('<div class="tiles-row">'+ 
+			('<svg width="300" height="300">' + this.template +'</svg>')
+				.repeat(3) 
+			+ '</div>')
+			.repeat(3);
 	}
     protected template = `<g *ngFor = "let row of data.generateTiles({
-        rowsCount: 6,
-        columnsCount: 20,
+        rowsCount: 7,
+        columnsCount: 7,
         xSpacing: 50,
         ySpacing: 50
     })">

@@ -23,6 +23,10 @@ h6 {
 /deep/ .nav-tabs .nav-link.active {
     color: #00cccc;
 }
+/deep/ .tiles-row {
+	line-height: 0;
+	width: 900px;
+}
 
 h3 {
 	color: #009999;
@@ -48,6 +52,8 @@ textarea {
 .tiles-display dynamic-view {
 	background: #fff;
 	width: 100%;
+	height: 300px;
 	display: inline-block;
 	margin: 0 auto;
+	overflow: hidden;
 }
