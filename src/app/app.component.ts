@@ -1,23 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { GeneratorsFactory } from './generators-factory.service';
+import { DataTools } from './data-tools.service';
 import { createOfflineCompileUrlResolver } from '@angular/compiler';
 
 @Component({
 	selector: 'app-root',
 	templateUrl: './app.component.html',
-	styleUrls: ['./app.component.css'],
-	providers: [ GeneratorsFactory ]
+	styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-	constructor( public generatorsFactory: GeneratorsFactory ) {}
-	protected data: Object;
+	constructor( public dataTools: DataTools ) {}
 	public ngOnInit() {
-	    let generatorsFactory = this.generatorsFactory;
-	    this.data = {
-            generateTiles: function(config: any):Object[][] {
-                return generatorsFactory.getTilesData(config);
-            }
-	    }
+		
 	}
 	public composeSVGTemplate(): string {
 
@@ -27,14 +20,34 @@ export class AppComponent implements OnInit {
 			+ '</div>')
 			.repeat(3);
 	}
-    protected template = `<g *ngFor = "let row of data.generateTiles({
-        rowsCount: 7,
-        columnsCount: 7,
-        xSpacing: 50,
-        ySpacing: 50
+    protected template = ` <g *ngFor = "let row of tools.generateGrid({
+        rowsCount: 2,
+        columnsCount: 17,
+        xSpacing: 20,
+        ySpacing: 300
     })">
     <path *ngFor = "let tile of row"
-          [attr.fill]="['#f00','#0f0','#00f'][(tile.row+tile.col)%3]" 
-          [attr.d]="tile.startPath().cAngle(0, 30, -30, 15).cAngle(90, 30, 105, 15).toString()"></path>
+          stroke = "#00ffff"
+          fill = "none"
+          stroke-width = 13
+          stroke-opacity=0.5
+		  [attr.d]="tile.startPath(0, -10)
+						.curveWithAngle(90, 301, 110, 120, -70, 120)
+						.toString()"></path>
+</g>
+ <g *ngFor = "let row of tools.generateGrid({
+        rowsCount: 17,
+        columnsCount: 2,
+        xSpacing: 300,
+        ySpacing: 20
+    })">
+    <path *ngFor = "let tile of row"
+          stroke = "#ffff00"
+          fill = "none"
+          stroke-width = 13
+          stroke-opacity=0.5
+		  [attr.d]="tile.startPath(-10, 0)
+						.curveWithAngle(0, 301,- 10, 120, 170, 120)
+						.toString()"></path>
 </g>`;
 }

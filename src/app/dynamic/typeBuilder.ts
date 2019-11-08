@@ -3,7 +3,7 @@ import { Compiler } from '@angular/core';
 import { CommonModule }  from "@angular/common";
 
 export interface IDataViewer { 
-    data: any;
+    tools: any;
 }
 
 @Injectable()
@@ -15,7 +15,7 @@ export class DynamicTypeBuilder {
             template: template,
         })
         class DynamicComponentFromTemplate  implements IDataViewer {
-            @Input()  public data: any;
+            @Input()  public tools: any;
         };
         
         @NgModule({

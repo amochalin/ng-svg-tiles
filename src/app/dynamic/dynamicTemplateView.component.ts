@@ -16,7 +16,7 @@ export class DynamicTemplateView implements AfterViewInit, OnChanges {
 	protected insertedComponentRef: ComponentRef<IDataViewer>;
 	
 	@Input()
-	public data: any;
+	public tools: any;
 	
 	@Input() 
 	public template: string;
@@ -32,7 +32,7 @@ export class DynamicTemplateView implements AfterViewInit, OnChanges {
 	    
 	    return this.typeBuilder.getComponentFactory(template).then((factory) => {
 	        this.insertedComponentRef = this.placeholder.createComponent(factory);
-	        this.insertedComponentRef.instance.data = this.data;
+	        this.insertedComponentRef.instance.tools = this.tools;
 	    });
 	}
 	
