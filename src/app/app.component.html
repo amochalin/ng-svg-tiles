@@ -12,7 +12,29 @@
                 <div class="row mt-3">
                     <div class="col-12">
                         <div class="tiles-display">
+                            <div class="tiles-display-text-top">
+                                Grid of 3x3 tiles<br>
+                                <input type="checkbox" (change)="showTileBorders=$event.target.checked"> show tile borders
+                            </div>
                             <dynamic-view class="" [tools]="dataTools" [template]="composeSVGTemplate()"></dynamic-view>
+                            <div class="tiles-display-options-bottom">
+                                <form [formGroup] = "dimensionsForm"
+                                      (ngSubmit)="onDimensionsSubmit()" 
+                                      class="tile-dimensions-form" 
+                                      action="#">
+                                    <div class="row no-gutters">
+                                        <div class="col-sm-auto">
+                                            <label for="tilewidth">Tile width (px)</label>
+                                            <input type="number" min="0" formControlName="tileWidth" id="tilewidth">
+                                        </div>
+                                        <div class="col-sm-auto">
+                                            <label for="tileheight">Tile height (px)</label>
+                                            <input type="number" min="0" formControlName="tileHeight" id="tileheight">
+                                            <input type="submit" value="s" style="display: none">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>

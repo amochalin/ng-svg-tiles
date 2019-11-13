@@ -44,7 +44,6 @@ export class DynamicTemplateView implements AfterViewInit, OnChanges {
 	    if (!this.initialized) {
 	        return;
 	    }
-	    console.log(this.template);
 	    this.renderTemplateToPlaceholder(this.template);
 	}
 }

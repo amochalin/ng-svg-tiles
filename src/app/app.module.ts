@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule, COMPILER_OPTIONS, Compiler, CompilerFactory } from '@angular/core';
 import { JitCompilerFactory } from '@angular/platform-browser-dynamic';
 
@@ -22,6 +23,7 @@ export function createCompiler(compilerFactory: CompilerFactory) {
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     NgbModule
   ],
   providers: [
