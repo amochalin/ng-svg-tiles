@@ -1,4 +1,4 @@
-import { Injectable, ComponentFactory, Component, NgModule, Input } from '@angular/core'
+import { Injectable, ComponentFactory, Component, NgModule, Input, ChangeDetectionStrategy } from '@angular/core'
 import { Compiler } from '@angular/core';
 import { CommonModule }  from "@angular/common";
 
@@ -13,6 +13,7 @@ export class DynamicTypeBuilder {
         @Component({
             selector: 'dynamic-component',
             template: template,
+            changeDetection: ChangeDetectionStrategy.OnPush
         })
         class DynamicComponentFromTemplate  implements IDataViewer {
             @Input()  public tools: any;
