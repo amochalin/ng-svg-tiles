@@ -10,6 +10,7 @@ import { DynamicTemplateView } from './dynamic/dynamicTemplateView.component';
 import { DynamicTypeBuilder } from './dynamic/typeBuilder';
 import { SvgEditorComponent } from './svg-editor/svg-editor.component';
 import { DataTools } from './data-tools.service';
+import { InfoTabComponent } from './info-tab/info-tab.component';
 
 export function createCompiler(compilerFactory: CompilerFactory) {
   return compilerFactory.createCompiler();
@@ -19,7 +20,8 @@ export function createCompiler(compilerFactory: CompilerFactory) {
   declarations: [
       AppComponent,
       SvgEditorComponent,
-	    DynamicTemplateView
+	    DynamicTemplateView,
+	    InfoTabComponent
   ],
   imports: [
     BrowserModule,
