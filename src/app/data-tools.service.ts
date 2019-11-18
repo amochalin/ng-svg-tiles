@@ -29,13 +29,13 @@ export class DataTools {
 			                curveWithAngle: function(angle, distance, startAngle, startDistance, endAngle, endDistance) {
 			                    let prevX = lastX,
 			                        prevY = lastY,
-			                        startPoint = [prevX + Math.cos(Math.PI * (startAngle || 0) / 180) * (startDistance || 0),
-			                                      prevY + Math.sin(Math.PI * (startAngle || 0) / 180) * (startDistance || 0)],
+			                        startPoint = [prevX + Math.cos(Math.PI * ((startAngle || 0) - 90) / 180) * (startDistance || 0),
+			                                      prevY + Math.sin(Math.PI * ((startAngle || 0) - 90) / 180) * (startDistance || 0)],
 			                        endPoint: number[];
-			                    lastX = lastX + Math.cos(Math.PI * angle / 180) * distance;
-								lastY = lastY + Math.sin(Math.PI * angle / 180) * distance;
-								endPoint = [lastX + Math.cos(Math.PI * (endAngle || 0) / 180) * (endDistance || 0),
-									        lastY + Math.sin(Math.PI * (endAngle || 0) / 180) * (endDistance || 0)]
+			                    lastX = lastX + Math.cos(Math.PI * (angle - 90) / 180) * distance;
+								lastY = lastY + Math.sin(Math.PI * (angle - 90) / 180) * distance;
+								endPoint = [lastX + Math.cos(Math.PI * ((endAngle || 0) + 90) / 180) * (endDistance || 0),
+									        lastY + Math.sin(Math.PI * ((endAngle || 0) + 90) / 180) * (endDistance || 0)]
 			                    
 			                    pathCommands.push('C ' + startPoint.join(' ') + ', '+ endPoint.join(' ')  + ', ' + lastX + ' ' + lastY );
 			                    return this;

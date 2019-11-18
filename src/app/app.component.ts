@@ -56,7 +56,7 @@ export class AppComponent implements OnInit {
 			+ '</div>')
 			.repeat(3);
 	}
-    protected template = ` <g *ngFor = "let row of tools.generateGrid({
+    protected template = `<g *ngFor = "let row of tools.generateGrid({
         rowsCount: 2,
         columnsCount: 17,
         xSpacing: 20,
@@ -68,7 +68,7 @@ export class AppComponent implements OnInit {
           stroke-width = 13
           stroke-opacity=0.5
 		  [attr.d]="tile.startPath(0, -10)
-						.curveWithAngle(90, 301, 110, 120, -70, 120)
+						.curveWithAngle(180, 301, 200, 120, 200, 120)
 						.toString()"></path>
 </g>
  <g *ngFor = "let row of tools.generateGrid({
@@ -83,7 +83,7 @@ export class AppComponent implements OnInit {
           stroke-width = 13
           stroke-opacity=0.5
 		  [attr.d]="tile.startPath(-10, 0)
-						.curveWithAngle(0, 301,- 10, 120, 170, 120)
+						.curveWithAngle(90, 301, 70, 120, 70, 120)
 						.toString()"></path>
 </g>`;
 }
