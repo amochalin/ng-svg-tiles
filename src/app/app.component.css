@@ -4,9 +4,6 @@
 	padding: 100px 0 130px;
 	margin-bottom: -44px; 
 }
-h6 {
-	color: #00cccc;
-}
 /deep/ .nav-tabs {
 	border-bottom: none;
 }
@@ -25,12 +22,6 @@ h6 {
 }
 /deep/ .tiles-row {
 	line-height: 0;
-}
-
-h3 {
-	color: #009999;
-	margin: 20px 0 10px;
-	font-size: 18px;
 }
 button {
 	color: #008888;

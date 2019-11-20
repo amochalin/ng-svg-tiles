@@ -1,1 +1,153 @@
-<p>info-tab works!</p>
+<h3>What is this app?</h3>
+<p>This app is an experiment designed to test if Angular 2+ templates 
+    can be handy or at least usable for generating tile images in SVG format.</p>
+<p>We call "tile image" an image which when replicated side by side in a grid
+    creates the impression of a repetitive ornament where separate tiles can fit together seamlessly
+    or, on the opposite, be themselves the main repetitive pattern.
+</p>
+<p>SVG format is an open standard for vector graphics, it's "web native" i.e. 
+    supported by all modern browsers and can also be easily imported into 
+    professional graphic design software like Adobe Illustrator to be converted
+    to a rasterized image or used in a larger graphic design project. It is 
+    also human readable; all this makes SVG a good choice for such a web-based 
+    tool.
+</p>
+
+<h3>How to use it?</h3>
+<p>One needs to be familiar with SVG format and Angular 2 (or later Angular version) templates
+    at least at some basic level; as Angular templates use expressiions closely
+    resembling those of Javascript some Javascript knowledge would also be very useful. 
+</p>
+<p>The app starts with a demo template rendered and editable. It doesn't include
+    the enclosing <code>&lt;svg&gt;&lt;/svg&gt;</code> tags and are added to the 
+    template by the app before rendering. The app replicates the SVG element
+    generated from the template in a 3x3 grid so the user can see how the tiles
+    fit together. The user can make app show tile borders (grid lines) and change 
+    tile dimensions.
+</p>
+
+<h3>Helper <code>tools</code> object</h3>
+<p>The application provides a helper object, <code>tools</code>, to simplify writing
+    templates for SVG tile images. The object's only method, <code>generateGrid(config)</code>, 
+    returns a 2-dimensional array (an array of "rows" each being an array of objects)
+    based on the configuration object passed as the argument.
+</p>
+<p>This argument object's properties describe the parameters of the grid in the following format
+    (the values of the properties shown in the example below are default: they will be used if 
+    no value is set for that key):
+</p>
+<pre><code>tools.generateGrid(&#123;
+    rowsCount: 5,
+    columnsCount: 5,
+    xSpacing: 100,
+    ySpacing: 100
+&#125;)
+</code></pre>
+<p><code>rowsCount</code> and <code>columnsCount</code> properties set the number of rows and 
+    columns in the 2-dimensional array returned by the method and <code>xSpacing</code> and 
+    <code>ySpacing</code> set the increment of grid element objects' <code>x</code> and 
+    <code>y</code> properties.
+</p>
+<p>So the app's user can use Angular's <code>*ngFor</code> directive to iterate
+    over rows and columns of the generated 2-dimensional array and use grid "cell"
+    objects' properties to position SVG elements and set their attributes, as in the 
+    example below:
+</p>
+<pre><code>&lt;g *ngFor="let row of tools.generateGrid(&#123;
+    rowsCount: 10,
+    columnsCount: 10,
+    xSpacing: 75,
+    ySpacing: 75
+&#125;)"&gt;
+    &lt;circle *ngFor="let cell of row"
+            r="30"
+            [attr.cx]="cell.x"
+            [attr.cy]="cell.y"
+            [attr.fill]="['red','blue'][(cell.row+cell.col)%2]"&gt;
+    &lt;/circle&gt;
+&lt;/g&gt;
+</code></pre>
+<p>Several important things should be mentioned about this example:</p>
+<ul>
+    <li>binding attributes of SVG elements to Angular expressions 
+        should be done using <code>[attr.<i>attribute_name</i>]</code> format</li>
+    <li>each "cell" object in the grid row array has several useful attributes: 
+        <code>row</code> and <code>col</code> correspond to the position of the cell
+        inside the grid array; <code>x</code> and <code>y</code> are incremented in each
+        row/column of the grid by <code>xSpacing</code> and <code>ySpacing</code> values
+        in the configuration parameter object provided to <code>tools.generateGrid()</code> 
+        method.
+    </li>
+    <li><code>&lt;g&gt;</code> SVG tag can be used to iterate over an array without displaying
+        any visible elements and replicate a container element that would enclose other SVG elements.
+    </li>
+</ul>
+<h3>Drawing paths using grid cell object</h3>
+<p>Besides <code>row</code>, <code>col</code>, <code>x</code> and <code>y</code> properties, 
+    the grid cells' objects have the <code>startPath(xOffset, yOffset)</code> method
+    which is designed to be used in <code>d</code> attribute of <code>&lt;path&gt;</code>
+    SVG tag to compose paths. Here's an example:
+</p>
+<pre><code>&lt;g *ngFor="let row of tools.generateGrid(&#123;
+        rowsCount: 10,
+        columnsCount: 10,
+        xSpacing: 75,
+        ySpacing: 75
+    &#125;)"&gt;
+    &lt;path *ngFor="let cell of row"
+            fill="black"
+            [attr.d]="cell.startPath(-10, -10)
+                    .curveWithAngle(90,50,60,20,120,20)
+                    .curveWithAngle(180,50,150,20,210,20)
+                    .curveWithAngle(270,50,240,20,300,20)
+                    .curveWithAngle(0,50,-30,20,30,20)"&gt;
+    &lt;/path&gt;
+&lt;/g&gt;
+</code></pre>
+<p>If we inspect the generated SVG code we will see <code>&lt;path&gt;</code> tags
+    there with some generated strings set for <code>d</code> attribute, e.g.:
+</p>
+<pre><code>&lt;path fill=&quot;black&quot; d=&quot;M65 -10 C 82.32050807568878 -20, 97.67949192431124 -20, 115 -10 C 125 7.320508075688771, 125 22.67949192431123, 115 40 C 97.67949192431122 50, 82.32050807568878 49.99999999999999, 65 40.00000000000001 C 55 22.679491924311233, 55 7.320508075688782, 65 -9.999999999999993&quot;&gt;&lt;/path&gt;
+</code></pre>
+<p>
+    As we can see, the <code>startPath()</code> method returns the object with
+    <code>curveWithAngle()</code> method which returns that object back which allows
+    to chain curveWithAngle calls to construct a multi-line path. Below are
+    the details of how this works:
+</p>
+<ul>
+    <li>The whole <code>cell.startPath(...).curveWithAngle(...)</code> construct is
+        used to generate the string with path data for <code>&lt;path&gt;</code> tag's 
+        <code>d</code> attribute; that generated string always starts with <code>M</code> 
+        command ("move to") followed by the coordinates of the path's starting point; it is 
+        followed by <code>C</code> ("curve to") commands followed by the path lines' 
+        parameters each line corresponding to a <code>curveWithAngle</code> method call.
+    </li>
+    <li><code>startPath</code> methode can be called with two parameters: <code>startPath(xOffset, yOffset)</code>
+        which set the horizontal and vertical offset of the starting point of the path relative 
+        to the top left corner of the grid cell i.e. this technique is designed to easily place paths 
+        repeated along the grid. If called with no parameters <code>startPath</code> method uses
+        the default zero offsets setting the starting point's coordinates equal to the cell object's
+        <code>x</code> and <code>y</code> properties.
+    </li>
+    <li>The second method has six parameters, which can be grouped into three angle-distance pairs:
+        <pre><code>curveWithAngle(angle, distance,
+               startAngle, startDistance,
+               endAngle, endDistance)</code></pre>
+        All three angle parameters are set in degrees where 0 direction always points to the top, 90 
+        to the right, 180 to the bottom and 270 to the left i.e. positive values go clockwise; negative 
+        values are also allowed so -90 is the same as 270; also values above 360 and below are also 
+        allowed (405 = 360 + 45 is the same as 45 etc). Distance parameters are measured in pixels.<br>
+        First pair, <code>angle, distance</code> sets where a path line's end point will be relative
+        to the starting point (which is also the end point of the previous line of the path) e.g. 
+        90, 100 will mean the line's end point will be 100 pixels to the right from its starting point.<br>
+        Two other pairs can be omitted - this will result in a straight line being drawn; if they are provided
+        it allows to draw curved lines if the angle values are different from the first <code>angle</code>
+        parameter.
+    </li>
+    <li>the object returned by <code>startPath</code> and <code>curveWithAngle</code> methods has also
+        <code>toString()</code> method that returns the string formatted for <code>d</code> attribute
+        of <code>&lt;path&gt;</code> tag but it's not necessary to call it explicitly because it is called
+        anyway in the process of implicit type coercion for getting a string representation of the object.
+    </li>
+</ul>

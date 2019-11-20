@@ -1,1 +1,8 @@
-/* You can add global styles to this file, and also import other style files */
+h3 {
+	color: #009999;
+	margin: 20px 0 10px;
+	font-size: 18px;
+}
+h6 {
+	color: #00cccc;
+}
