@@ -67,6 +67,11 @@
     &lt;/circle&gt;
 &lt;/g&gt;
 </code></pre>
+<p>This template will make the application generate the following pattern (dashed
+    lines are tiles' borders):</p>
+<div class="text-center">
+    <img src="assets/result-example-1.png">
+</div>
 <p>Several important things should be mentioned about this example:</p>
 <ul>
     <li>binding attributes of SVG elements to Angular expressions 
@@ -104,6 +109,13 @@
     &lt;/path&gt;
 &lt;/g&gt;
 </code></pre>
+<p>Notice that first parameters of each <code>curveWithAngle</code> call are angles 
+    in degrees (90-180-270-0) and second parameters all equal 50, so as expected
+    the rendered image looks like squares, but with curved borders (again, dashed
+        lines here are tiles' borders):</p>
+<div class="text-center">
+    <img src="assets/result-example-2.png">
+</div>
 <p>If we inspect the generated SVG code we will see <code>&lt;path&gt;</code> tags
     there with some generated strings set for <code>d</code> attribute, e.g.:
 </p>
@@ -144,6 +156,9 @@
         Two other pairs can be omitted - this will result in a straight line being drawn; if they are provided
         it allows to draw curved lines if the angle values are different from the first <code>angle</code>
         parameter.
+        <div class="text-center">
+                <img src="assets/angles-diagram.png">
+        </div>
     </li>
     <li>the object returned by <code>startPath</code> and <code>curveWithAngle</code> methods has also
         <code>toString()</code> method that returns the string formatted for <code>d</code> attribute
