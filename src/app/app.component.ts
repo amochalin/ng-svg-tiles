@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { DataTools } from './data-tools.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { createOfflineCompileUrlResolver } from '@angular/compiler';
+import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
 	selector: 'app-root',
@@ -21,9 +22,19 @@ export class AppComponent implements OnInit {
 		tileWidth: new FormControl(this.tileWidth),
 	});
 	showTileBorders = false;
+	@ViewChild(NgbTabset, {static: false})
+	private tabset: NgbTabset;
 	public onDimensionsSubmit() {
 		this.tileHeight = parseFloat(this.dimensionsForm.value.tileHeight);
 		this.tileWidth = parseFloat(this.dimensionsForm.value.tileWidth);
+	}
+	public infoEditRequest(templateText: string) {
+		this.template = templateText;
+		this.tileWidth = 300;
+		this.tileHeight = 300;
+		this.dimensionsForm.controls.tileHeight.setValue(300);
+		this.dimensionsForm.controls.tileWidth.setValue(300);
+		this.tabset.select('home');
 	}
 	public composeSVGTemplate(): string {
 		const tileBordersSVG = this.showTileBorders ? `

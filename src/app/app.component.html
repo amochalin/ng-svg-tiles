@@ -5,8 +5,9 @@
     </div>
 </div>
 <div class="container">
-    <ngb-tabset>
-        <ngb-tab title="Home">
+    <ngb-tabset #tabset="ngbTabset"
+                destroyOnHide="false">
+        <ngb-tab id="home" title="Home">
             <ng-template ngbTabContent>
                 <h3>Rendered SVG Tiles</h3>
                 <div class="row mt-3">
@@ -49,7 +50,8 @@
         </ngb-tab>
         <ngb-tab title="Info">
             <ng-template ngbTabContent>
-                <info-tab></info-tab>
+                <info-tab (editRequest)="infoEditRequest($event)">
+                </info-tab>
             </ng-template>
         </ngb-tab>
     </ngb-tabset>

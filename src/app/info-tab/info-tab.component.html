@@ -53,7 +53,7 @@
     objects' properties to position SVG elements and set their attributes, as in the 
     example below:
 </p>
-<pre><code>&lt;g *ngFor="let row of tools.generateGrid(&#123;
+<pre><code #example1>&lt;g *ngFor="let row of tools.generateGrid(&#123;
     rowsCount: 10,
     columnsCount: 10,
     xSpacing: 75,
@@ -67,6 +67,9 @@
     &lt;/circle&gt;
 &lt;/g&gt;
 </code></pre>
+<a href="#" 
+   (click)="requestEdit(example1);false"
+   class="try-link">Try this template in the app</a>
 <p>This template will make the application generate the following pattern (dashed
     lines are tiles' borders):</p>
 <div class="text-center">
@@ -93,7 +96,7 @@
     which is designed to be used in <code>d</code> attribute of <code>&lt;path&gt;</code>
     SVG tag to compose paths. Here's an example:
 </p>
-<pre><code>&lt;g *ngFor="let row of tools.generateGrid(&#123;
+<pre><code #example2>&lt;g *ngFor="let row of tools.generateGrid(&#123;
         rowsCount: 10,
         columnsCount: 10,
         xSpacing: 75,
@@ -109,6 +112,9 @@
     &lt;/path&gt;
 &lt;/g&gt;
 </code></pre>
+<a href="#" 
+   (click)="requestEdit(example2);false"
+   class="try-link">Try this template in the app</a>
 <p>Notice that first parameters of each <code>curveWithAngle</code> call are angles 
     in degrees (90-180-270-0) and second parameters all equal 50, so as expected
     the rendered image looks like squares, but with curved borders (again, dashed
