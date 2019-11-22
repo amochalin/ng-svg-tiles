@@ -17,7 +17,7 @@
                                 Grid of 3x3 tiles<br>
                                 <input type="checkbox" (change)="showTileBorders=$event.target.checked"> show tile borders
                             </div>
-                            <dynamic-view class="" [tools]="dataTools" [template]="composeSVGTemplate()"></dynamic-view>
+                            <dynamic-view [tools]="dataTools" [template]="composeSVGTemplate()"></dynamic-view>
                             <div class="tiles-display-options-bottom">
                                 <form [formGroup] = "dimensionsForm"
                                       (ngSubmit)="onDimensionsSubmit()" 

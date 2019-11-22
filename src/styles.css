@@ -1,3 +1,9 @@
+body {
+	padding-bottom: 30px;
+}
+a, a:hover {
+	color: #009999;
+}
 h3 {
 	color: #009999;
 	margin: 20px 0 10px;
