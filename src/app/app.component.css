@@ -36,6 +36,15 @@ textarea {
 #templateInput {
 	font-family: monospace;
 }
+.save-svg {
+	float: right;
+}
+.save-svg a:hover {
+	text-decoration: none;
+}
+.save-svg svg {
+	vertical-align: middle;
+}
 .tiles-display {
 	background: #888;
 	padding: 50px;

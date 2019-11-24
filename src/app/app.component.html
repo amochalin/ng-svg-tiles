@@ -9,10 +9,23 @@
                 destroyOnHide="false">
         <ngb-tab id="home" title="Home">
             <ng-template ngbTabContent>
+                <div class="save-svg">
+                    <a href="#" (click)="saveSvg()">
+                        <svg height="23" width="21">
+                            <path stroke="#009999"
+                                stroke-width="1"
+                                fill="none"
+                                d="M 10 0 L 10 20 M 0 10 L 10 20 M  20 10 L 10 20
+                                    M 0 18 L 0 22 L 20 22 L 20 18"
+                            ></path>
+                        </svg>
+                        Save SVG
+                    </a>
+                </div>
                 <h3>Rendered SVG Tiles</h3>
                 <div class="row mt-3">
                     <div class="col-12">
-                        <div class="tiles-display">
+                        <div class="tiles-display" #renderedView>
                             <div class="tiles-display-text-top">
                                 Grid of 3x3 tiles<br>
                                 <input type="checkbox" (change)="showTileBorders=$event.target.checked"> show tile borders

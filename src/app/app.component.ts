@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { DataTools } from './data-tools.service';
 import { FormControl, FormGroup } from '@angular/forms';
-import { createOfflineCompileUrlResolver } from '@angular/compiler';
 import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
+import { saveAs } from 'file-saver';
 
 @Component({
 	selector: 'app-root',
@@ -22,8 +22,13 @@ export class AppComponent implements OnInit {
 		tileWidth: new FormControl(this.tileWidth),
 	});
 	showTileBorders = false;
+	
 	@ViewChild(NgbTabset, {static: false})
 	private tabset: NgbTabset;
+
+	@ViewChild('renderedView', {static: false})
+	renderedView: ElementRef;
+
 	public onDimensionsSubmit() {
 		this.tileHeight = parseFloat(this.dimensionsForm.value.tileHeight);
 		this.tileWidth = parseFloat(this.dimensionsForm.value.tileWidth);
@@ -35,6 +40,29 @@ export class AppComponent implements OnInit {
 		this.dimensionsForm.controls.tileHeight.setValue(300);
 		this.dimensionsForm.controls.tileWidth.setValue(300);
 		this.tabset.select('home');
+	}
+	public saveSvg() {
+		const svgElementClone = this.renderedView
+				.nativeElement
+				.querySelector('div.tiles-row')
+				.children[0]
+				.cloneNode(true),
+			commentRemovalQueue = [svgElementClone],
+			svgHolder = document.createElement('div');
+		for (let el of commentRemovalQueue) {
+			const commentChildren = [];
+			for (let childNode of el.childNodes) {
+				if (childNode.nodeType === 8) {
+					commentChildren.push(childNode);
+				} else {
+					commentRemovalQueue.push(childNode);
+				}
+			}
+			commentChildren.forEach(commentNode => el.removeChild(commentNode));
+		}
+		svgHolder.appendChild(svgElementClone);
+		const svgText = svgHolder.innerHTML;
+		saveAs(new Blob([svgText], {type:'image/svg+xml;charset=utf-8'}), 'tile.svg');
 	}
 	public composeSVGTemplate(): string {
 		const tileBordersSVG = this.showTileBorders ? `
