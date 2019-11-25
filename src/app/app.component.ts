@@ -22,6 +22,7 @@ export class AppComponent implements OnInit {
 		tileWidth: new FormControl(this.tileWidth),
 	});
 	showTileBorders = false;
+	changedTemplate = '';
 	
 	@ViewChild(NgbTabset, {static: false})
 	private tabset: NgbTabset;
@@ -95,7 +96,7 @@ export class AppComponent implements OnInit {
 			+ '</div>')
 			.repeat(3);
 	}
-    protected template = `<g *ngFor = "let row of tools.generateGrid({
+    public template = `<g *ngFor = "let row of tools.generateGrid({
         rowsCount: 2,
         columnsCount: 17,
         xSpacing: 20,
