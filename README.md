@@ -1,27 +1,16 @@
-# A8svg
+# ng-svg-tiles
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.6.
+<b>Live version of this app can be found at <a href="http://svg-tiles.appspot.com/">http://svg-tiles.appspot.com/</a></b>
 
-## Development server
+This app is an experiment designed to test if Angular 2+ templates can be handy or at least usable for generating tile images in SVG format.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+We call "tile image" an image which when replicated side by side in a grid creates the impression of a repetitive ornament where separate tiles can fit together seamlessly or, on the opposite, be themselves the main repetitive pattern.
 
-## Code scaffolding
+SVG format is an open standard for vector graphics, it's "web native" i.e. supported by all modern browsers and can also be easily imported into professional graphic design software like Adobe Illustrator to be converted to a rasterized image or used in a larger graphic design project. It is also human readable; all this makes SVG a good choice for such a web-based tool.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## How to use it?
 
-## Build
+One needs to be familiar with SVG format and Angular 2 (or later Angular version) templates at least at some basic level; as Angular templates use expressiions closely resembling those of Javascript some Javascript knowledge would also be very useful.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+The app starts with a demo template rendered and editable. It doesn't include the enclosing &lt;svg&gt;&lt;/svg&gt; tags and are added to the template by the app before rendering. The app replicates the SVG element generated from the template in a 3x3 grid so the user can see how the tiles fit together. The user can make app show tile borders (grid lines) and change tile dimensions. The resulting SVG code for a single tile can be saved locally by clicking "Save SVG" link.
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
