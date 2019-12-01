@@ -1,6 +1,6 @@
 # ng-svg-tiles
 
-<b>Live version of this app can be found at <a href="http://svg-tiles.appspot.com/">http://svg-tiles.appspot.com/</a></b>
+<b>Live version of this app can be found at <a href="https://svg-tiles.appspot.com/" target="_new">https://svg-tiles.appspot.com/</a></b>
 
 This app is an experiment designed to test if Angular 2+ templates can be handy or at least usable for generating tile images in SVG format.
 
